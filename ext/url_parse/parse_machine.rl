@@ -17,7 +17,7 @@
 %% write data;
 
 void
-execute(const char *buffer, size_t len)
+execute(const char *buffer, size_t len, parse_machine *pm)
 {
   int cs = 0;
   const char *p, *pe, *eof;

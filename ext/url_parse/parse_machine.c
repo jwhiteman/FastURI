@@ -57,24 +57,26 @@ static const int url_parse_en_main = 1;
 #line 18 "parse_machine.rl"
 
 void
-execute(const char *buffer, size_t len)
+execute(const char *buffer, size_t len, parse_machine *pm)
 {
   int cs = 0;
   const char *p, *pe, *eof;
+
+  printf("it is %zu\n", pm->mark);
 
   p   = buffer;
   pe  = buffer + len;
   eof = pe;
 
   
-#line 71 "parse_machine.c"
+#line 73 "parse_machine.c"
 	{
 	cs = url_parse_start;
 	}
 
-#line 30 "parse_machine.rl"
+#line 32 "parse_machine.rl"
   
-#line 78 "parse_machine.c"
+#line 80 "parse_machine.c"
 	{
 	int _klen;
 	unsigned int _trans;
@@ -151,7 +153,7 @@ _match:
 #line 7 "parse_machine.rl"
 	{ printf("shouting!\n"); }
 	break;
-#line 155 "parse_machine.c"
+#line 157 "parse_machine.c"
 		}
 	}
 
@@ -164,5 +166,5 @@ _again:
 	_out: {}
 	}
 
-#line 31 "parse_machine.rl"
+#line 33 "parse_machine.rl"
 }

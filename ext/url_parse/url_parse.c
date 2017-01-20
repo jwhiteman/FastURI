@@ -30,7 +30,9 @@ URLParse_parse(VALUE self)
   dptr    = RSTRING_PTR(s);
   dlen    = RSTRING_LEN(s);
 
-  execute(dptr, dlen);
+  parse_machine *pm = NULL;
+  Data_Get_Struct(self, parse_machine, pm);
+  execute(dptr, dlen, pm);
 
   return Qnil;
 }
