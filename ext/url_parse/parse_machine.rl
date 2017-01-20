@@ -1,17 +1,58 @@
 #include <stdio.h>
 #include "parse_machine.h"
 
+#define LEN(AT, FPC) (FPC - buffer - pm->AT)
+#define MARK(M,FPC) (pm->M = (FPC) - buffer)
+#define PTR_TO(F) (buffer + pm->F)
+
 %%{
   machine url_parse;
 
-  action shout { printf("shouting!\n"); }
+  action dbg {
+    printf("dbg called\n");
+  }
 
-  term = "ZZ";
-  msg  = "hello" %shout;
+  action mark {
+    printf("mark called\n");
+    MARK(mark, fpc);
+  }
 
-  proto = msg term;
+  action uri {
+    printf("URI: %s\n", PTR_TO(mark));
+  }
 
-  main := proto;
+  action scheme {
+    printf("scheme\n");
+  }
+
+  action host {
+    printf("host\n");
+  }
+
+  action path {
+   printf("path\n");
+  }
+
+  action query {
+    printf("query\n");
+  }
+
+  action fragment {
+     printf("fragment\n");
+  }
+
+  toplabel    = alpha | alpha (alnum | "-")* alnum;
+  domainlabel = alnum | alnum (alnum | "-")* alnum;
+  hostname    = (domainlabel ".")* toplabel;
+  host        = hostname;
+  hostport    = host;
+  server      = hostport;
+  authority   = server;
+  net_path    = "//" authority;
+  relativeURI = net_path;
+  URI         = relativeURI >mark %/uri;
+
+  main := URI;
 }%%
 
 %% write data;
@@ -26,6 +67,7 @@ execute(const char *buffer, size_t len, parse_machine *pm)
   pe  = buffer + len;
   eof = pe;
 
+  // printf("buffer is %s\n", buffer);
   %% write init;
   %% write exec;
 }

@@ -3,58 +3,71 @@
 #include <stdio.h>
 #include "parse_machine.h"
 
+#define LEN(AT, FPC) (FPC - buffer - pm->AT)
+#define MARK(M,FPC) (pm->M = (FPC) - buffer)
+#define PTR_TO(F) (buffer + pm->F)
 
-#line 15 "parse_machine.rl"
+
+#line 56 "parse_machine.rl"
 
 
 
-#line 12 "parse_machine.c"
+#line 16 "parse_machine.c"
 static const char _url_parse_actions[] = {
-	0, 1, 0
+	0, 1, 0, 1, 1
 };
 
 static const char _url_parse_key_offsets[] = {
-	0, 0, 1, 2, 3, 4, 5, 6, 
-	7
+	0, 0, 1, 2, 8, 16, 23, 30
 };
 
 static const char _url_parse_trans_keys[] = {
-	104, 101, 108, 108, 111, 90, 90, 0
+	47, 47, 48, 57, 65, 90, 97, 122, 
+	45, 46, 48, 57, 65, 90, 97, 122, 
+	45, 48, 57, 65, 90, 97, 122, 45, 
+	48, 57, 65, 90, 97, 122, 45, 46, 
+	48, 57, 65, 90, 97, 122, 0
 };
 
 static const char _url_parse_single_lengths[] = {
-	0, 1, 1, 1, 1, 1, 1, 1, 
-	0
+	0, 1, 1, 0, 2, 1, 1, 2
 };
 
 static const char _url_parse_range_lengths[] = {
-	0, 0, 0, 0, 0, 0, 0, 0, 
-	0
+	0, 0, 0, 3, 3, 3, 3, 3
 };
 
 static const char _url_parse_index_offsets[] = {
-	0, 0, 2, 4, 6, 8, 10, 12, 
-	14
+	0, 0, 2, 4, 8, 14, 19, 24
+};
+
+static const char _url_parse_indicies[] = {
+	0, 1, 2, 1, 3, 4, 4, 1, 
+	5, 2, 3, 3, 3, 1, 5, 3, 
+	3, 3, 1, 6, 4, 4, 4, 1, 
+	6, 2, 4, 4, 4, 1, 0
 };
 
 static const char _url_parse_trans_targs[] = {
-	2, 0, 3, 0, 4, 0, 5, 0, 
-	6, 0, 7, 0, 8, 0, 0, 0
+	2, 0, 3, 4, 7, 5, 6
 };
 
 static const char _url_parse_trans_actions[] = {
-	0, 0, 0, 0, 0, 0, 0, 0, 
-	0, 0, 1, 0, 0, 0, 0, 0
+	1, 0, 0, 0, 0, 0, 0
+};
+
+static const char _url_parse_eof_actions[] = {
+	0, 0, 0, 0, 0, 0, 0, 3
 };
 
 static const int url_parse_start = 1;
-static const int url_parse_first_final = 8;
+static const int url_parse_first_final = 7;
 static const int url_parse_error = 0;
 
 static const int url_parse_en_main = 1;
 
 
-#line 18 "parse_machine.rl"
+#line 59 "parse_machine.rl"
 
 void
 execute(const char *buffer, size_t len, parse_machine *pm)
@@ -62,21 +75,20 @@ execute(const char *buffer, size_t len, parse_machine *pm)
   int cs = 0;
   const char *p, *pe, *eof;
 
-  printf("it is %zu\n", pm->mark);
-
   p   = buffer;
   pe  = buffer + len;
   eof = pe;
 
+  // printf("buffer is %s\n", buffer);
   
-#line 73 "parse_machine.c"
+#line 85 "parse_machine.c"
 	{
 	cs = url_parse_start;
 	}
 
-#line 32 "parse_machine.rl"
+#line 72 "parse_machine.rl"
   
-#line 80 "parse_machine.c"
+#line 92 "parse_machine.c"
 	{
 	int _klen;
 	unsigned int _trans;
@@ -138,6 +150,7 @@ _resume:
 	}
 
 _match:
+	_trans = _url_parse_indicies[_trans];
 	cs = _url_parse_trans_targs[_trans];
 
 	if ( _url_parse_trans_actions[_trans] == 0 )
@@ -150,10 +163,13 @@ _match:
 		switch ( *_acts++ )
 		{
 	case 0:
-#line 7 "parse_machine.rl"
-	{ printf("shouting!\n"); }
+#line 15 "parse_machine.rl"
+	{
+    printf("mark called\n");
+    MARK(mark, p);
+  }
 	break;
-#line 157 "parse_machine.c"
+#line 173 "parse_machine.c"
 		}
 	}
 
@@ -163,8 +179,25 @@ _again:
 	if ( ++p != pe )
 		goto _resume;
 	_test_eof: {}
+	if ( p == eof )
+	{
+	const char *__acts = _url_parse_actions + _url_parse_eof_actions[cs];
+	unsigned int __nacts = (unsigned int) *__acts++;
+	while ( __nacts-- > 0 ) {
+		switch ( *__acts++ ) {
+	case 1:
+#line 20 "parse_machine.rl"
+	{
+    printf("URI: %s\n", PTR_TO(mark));
+  }
+	break;
+#line 195 "parse_machine.c"
+		}
+	}
+	}
+
 	_out: {}
 	}
 
-#line 33 "parse_machine.rl"
+#line 73 "parse_machine.rl"
 }

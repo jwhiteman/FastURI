@@ -1,13 +1,17 @@
 require "spec_helper"
 
 describe URLParse do
-  let(:parser) do
-    URLParse.new("http://foo.com/posts?id=30&limit=5#time=1305298413")
-  end
-
   describe "#parse" do
-    it "parses" do
-      parser.parse
+    it "parses relative netpaths" do
+      up = URLParse.new("//foo-bar-baz")
+
+      up.parse
+    end
+
+    it "parses relative netpaths with domain labels" do
+      up = URLParse.new("//foo.bar.baz")
+
+      up.parse
     end
   end
 end
