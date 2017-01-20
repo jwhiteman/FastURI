@@ -2,17 +2,18 @@
 #line 1 "parse_machine.rl"
 #include <stdio.h>
 #include "parse_machine.h"
+#include "url_parse.h"
 
-#define LEN(AT, FPC) (FPC - buffer - pm->AT)
-#define MARK(M,FPC) (pm->M = (FPC) - buffer)
-#define PTR_TO(F) (buffer + pm->F)
+#define LEN(AT, FPC) (FPC - buffer - AT)
+#define MARK(M,FPC) (M = (FPC) - buffer)
+#define PTR_TO(FIELD) (buffer + FIELD)
 
 
 #line 56 "parse_machine.rl"
 
 
 
-#line 16 "parse_machine.c"
+#line 17 "parse_machine.c"
 static const char _url_parse_actions[] = {
 	0, 1, 0, 1, 1
 };
@@ -70,8 +71,9 @@ static const int url_parse_en_main = 1;
 #line 59 "parse_machine.rl"
 
 void
-execute(const char *buffer, size_t len, parse_machine *pm)
+execute(const char *buffer, size_t len)
 {
+  size_t mark = 0;
   int cs = 0;
   const char *p, *pe, *eof;
 
@@ -79,16 +81,15 @@ execute(const char *buffer, size_t len, parse_machine *pm)
   pe  = buffer + len;
   eof = pe;
 
-  // printf("buffer is %s\n", buffer);
   
-#line 85 "parse_machine.c"
+#line 86 "parse_machine.c"
 	{
 	cs = url_parse_start;
 	}
 
 #line 72 "parse_machine.rl"
   
-#line 92 "parse_machine.c"
+#line 93 "parse_machine.c"
 	{
 	int _klen;
 	unsigned int _trans;
@@ -163,9 +164,8 @@ _match:
 		switch ( *_acts++ )
 		{
 	case 0:
-#line 15 "parse_machine.rl"
+#line 16 "parse_machine.rl"
 	{
-    printf("mark called\n");
     MARK(mark, p);
   }
 	break;

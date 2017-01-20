@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include "parse_machine.h"
+#include "url_parse.h"
 
-#define LEN(AT, FPC) (FPC - buffer - pm->AT)
-#define MARK(M,FPC) (pm->M = (FPC) - buffer)
-#define PTR_TO(F) (buffer + pm->F)
+#define LEN(AT, FPC) (FPC - buffer - AT)
+#define MARK(M,FPC) (M = (FPC) - buffer)
+#define PTR_TO(FIELD) (buffer + FIELD)
 
 %%{
   machine url_parse;
@@ -13,7 +14,6 @@
   }
 
   action mark {
-    printf("mark called\n");
     MARK(mark, fpc);
   }
 
@@ -58,8 +58,9 @@
 %% write data;
 
 void
-execute(const char *buffer, size_t len, parse_machine *pm)
+execute(const char *buffer, size_t len)
 {
+  size_t mark = 0;
   int cs = 0;
   const char *p, *pe, *eof;
 
@@ -67,7 +68,6 @@ execute(const char *buffer, size_t len, parse_machine *pm)
   pe  = buffer + len;
   eof = pe;
 
-  // printf("buffer is %s\n", buffer);
   %% write init;
   %% write exec;
 }
