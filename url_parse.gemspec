@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "url_parse"
   spec.version       = URLParse::VERSION
   spec.authors       = ["Jim Whiteman"]
-  spec.email         = ["jwhiteman@uplandsoftware.com"]
+  spec.email         = ["jimtron9000@gmail.com"]
 
   spec.summary       = %q{A ragel-backed URL parser}
   spec.description   = %q{A ragel-backed URL parser}
