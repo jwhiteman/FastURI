@@ -37,10 +37,11 @@
      printf("fragment\n");
   }
 
+  IPv4address = digit+ "." digit+ "." digit+ "." digit+;
   toplabel    = alpha | alpha (alnum | "-")* alnum;
   domainlabel = alnum | alnum (alnum | "-")* alnum;
-  hostname    = (domainlabel ".")* toplabel;
-  host        = hostname;
+  hostname    = (domainlabel ".")* toplabel (".")?;
+  host        = hostname | IPv4address;
   hostport    = host;
   server      = hostport;
   authority   = server;

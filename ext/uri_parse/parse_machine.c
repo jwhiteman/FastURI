@@ -9,7 +9,7 @@
 #define PTR_TO(FIELD) (buffer + FIELD)
 
 
-#line 52 "parse_machine.rl"
+#line 53 "parse_machine.rl"
 
 
 
@@ -19,56 +19,82 @@ static const char _uri_parse_actions[] = {
 };
 
 static const char _uri_parse_key_offsets[] = {
-	0, 0, 1, 2, 8, 16, 23, 30
+	0, 0, 1, 2, 8, 16, 23, 31, 
+	37, 44, 50, 58, 64, 72, 78, 86, 
+	92
 };
 
 static const char _uri_parse_trans_keys[] = {
 	47, 47, 48, 57, 65, 90, 97, 122, 
 	45, 46, 48, 57, 65, 90, 97, 122, 
 	45, 48, 57, 65, 90, 97, 122, 45, 
+	46, 48, 57, 65, 90, 97, 122, 48, 
+	57, 65, 90, 97, 122, 45, 48, 57, 
+	65, 90, 97, 122, 48, 57, 65, 90, 
+	97, 122, 45, 46, 48, 57, 65, 90, 
+	97, 122, 48, 57, 65, 90, 97, 122, 
+	45, 46, 48, 57, 65, 90, 97, 122, 
 	48, 57, 65, 90, 97, 122, 45, 46, 
-	48, 57, 65, 90, 97, 122, 0
+	48, 57, 65, 90, 97, 122, 48, 57, 
+	65, 90, 97, 122, 45, 46, 48, 57, 
+	65, 90, 97, 122, 0
 };
 
 static const char _uri_parse_single_lengths[] = {
-	0, 1, 1, 0, 2, 1, 1, 2
+	0, 1, 1, 0, 2, 1, 2, 0, 
+	1, 0, 2, 0, 2, 0, 2, 0, 
+	2
 };
 
 static const char _uri_parse_range_lengths[] = {
-	0, 0, 0, 3, 3, 3, 3, 3
+	0, 0, 0, 3, 3, 3, 3, 3, 
+	3, 3, 3, 3, 3, 3, 3, 3, 
+	3
 };
 
 static const char _uri_parse_index_offsets[] = {
-	0, 0, 2, 4, 8, 14, 19, 24
+	0, 0, 2, 4, 8, 14, 19, 25, 
+	29, 34, 38, 44, 48, 54, 58, 64, 
+	68
 };
 
 static const char _uri_parse_indicies[] = {
 	0, 1, 2, 1, 3, 4, 4, 1, 
-	5, 2, 3, 3, 3, 1, 5, 3, 
-	3, 3, 1, 6, 4, 4, 4, 1, 
-	6, 2, 4, 4, 4, 1, 0
+	5, 6, 3, 7, 7, 1, 5, 7, 
+	7, 7, 1, 5, 8, 7, 7, 7, 
+	1, 7, 4, 4, 1, 9, 4, 4, 
+	4, 1, 10, 4, 4, 1, 5, 11, 
+	10, 7, 7, 1, 12, 4, 4, 1, 
+	5, 13, 12, 7, 7, 1, 14, 4, 
+	4, 1, 9, 15, 4, 4, 4, 1, 
+	7, 4, 4, 1, 5, 8, 14, 7, 
+	7, 1, 0
 };
 
 static const char _uri_parse_trans_targs[] = {
-	2, 0, 3, 4, 7, 5, 6
+	2, 0, 3, 4, 14, 5, 9, 6, 
+	7, 8, 10, 11, 12, 13, 16, 15
 };
 
 static const char _uri_parse_trans_actions[] = {
-	1, 0, 0, 0, 0, 0, 0
+	1, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0
 };
 
 static const char _uri_parse_eof_actions[] = {
-	0, 0, 0, 0, 0, 0, 0, 3
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 3, 3, 
+	3
 };
 
 static const int uri_parse_start = 1;
-static const int uri_parse_first_final = 7;
+static const int uri_parse_first_final = 14;
 static const int uri_parse_error = 0;
 
 static const int uri_parse_en_main = 1;
 
 
-#line 55 "parse_machine.rl"
+#line 56 "parse_machine.rl"
 
 void
 execute(void *hash, const char *buffer, size_t len)
@@ -82,14 +108,14 @@ execute(void *hash, const char *buffer, size_t len)
   eof = pe;
 
   
-#line 86 "parse_machine.c"
+#line 112 "parse_machine.c"
 	{
 	cs = uri_parse_start;
 	}
 
-#line 68 "parse_machine.rl"
+#line 69 "parse_machine.rl"
   
-#line 93 "parse_machine.c"
+#line 119 "parse_machine.c"
 	{
 	int _klen;
 	unsigned int _trans;
@@ -169,7 +195,7 @@ _match:
     MARK(mark, p);
   }
 	break;
-#line 173 "parse_machine.c"
+#line 199 "parse_machine.c"
 		}
 	}
 
@@ -191,7 +217,7 @@ _again:
     URIParse_set(hash, PTR_TO(mark), LEN(mark, p), id_uri);
   }
 	break;
-#line 195 "parse_machine.c"
+#line 221 "parse_machine.c"
 		}
 	}
 	}
@@ -199,5 +225,5 @@ _again:
 	_out: {}
 	}
 
-#line 69 "parse_machine.rl"
+#line 70 "parse_machine.rl"
 }
