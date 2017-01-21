@@ -1,6 +1,3 @@
-/*
- * TODO: change from class to module (?)
-*/
 #include "uri_parse.h"
 #include "parse_machine.h"
 
