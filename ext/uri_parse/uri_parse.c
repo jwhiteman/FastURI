@@ -1,5 +1,4 @@
 /*
- * TODO: adopt consistent usage of either URL or URI
  * TODO: change from class to module (?)
 */
 #include "uri_parse.h"
