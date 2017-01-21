@@ -25,10 +25,12 @@ task :ragel do
 
     sh "rm -f doc/graph.png"
     sh "ragel parse_machine.rl -o #{target}"
+=begin
     sh "ragel -Vp parse_machine.rl -o graph.dot"
     sh "dot graph.dot -Tpng -o ../../doc/graph.png"
     sh "rm graph.dot"
     sh "open ../../doc/graph.png"
+=end
 
     raise "ragel failed" unless File.exist?(target)
   end
