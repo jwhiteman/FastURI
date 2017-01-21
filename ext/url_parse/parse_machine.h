@@ -1,1 +1,1 @@
-void execute(const char *buffer, size_t len);
+void execute(void *upi, const char *buffer, size_t len);

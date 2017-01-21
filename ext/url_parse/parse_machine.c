@@ -9,7 +9,7 @@
 #define PTR_TO(FIELD) (buffer + FIELD)
 
 
-#line 56 "parse_machine.rl"
+#line 52 "parse_machine.rl"
 
 
 
@@ -68,10 +68,10 @@ static const int url_parse_error = 0;
 static const int url_parse_en_main = 1;
 
 
-#line 59 "parse_machine.rl"
+#line 55 "parse_machine.rl"
 
 void
-execute(const char *buffer, size_t len)
+execute(void *upi, const char *buffer, size_t len)
 {
   size_t mark = 0;
   int cs = 0;
@@ -87,7 +87,7 @@ execute(const char *buffer, size_t len)
 	cs = url_parse_start;
 	}
 
-#line 72 "parse_machine.rl"
+#line 68 "parse_machine.rl"
   
 #line 93 "parse_machine.c"
 	{
@@ -164,7 +164,7 @@ _match:
 		switch ( *_acts++ )
 		{
 	case 0:
-#line 16 "parse_machine.rl"
+#line 12 "parse_machine.rl"
 	{
     MARK(mark, p);
   }
@@ -186,9 +186,9 @@ _again:
 	while ( __nacts-- > 0 ) {
 		switch ( *__acts++ ) {
 	case 1:
-#line 20 "parse_machine.rl"
+#line 16 "parse_machine.rl"
 	{
-    printf("URI: %s\n", PTR_TO(mark));
+    URLParse_set_uri(upi, PTR_TO(mark), LEN(mark, p));
   }
 	break;
 #line 195 "parse_machine.c"
@@ -199,5 +199,5 @@ _again:
 	_out: {}
 	}
 
-#line 73 "parse_machine.rl"
+#line 69 "parse_machine.rl"
 }

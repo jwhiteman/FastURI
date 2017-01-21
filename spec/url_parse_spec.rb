@@ -5,13 +5,13 @@ describe URLParse do
     it "parses relative netpaths" do
       up = URLParse.new("//foo-bar-baz")
 
-      up.parse
+      expect(up.parse).to eq({uri: "//foo-bar-baz"})
     end
 
     it "parses relative netpaths with domain labels" do
       up = URLParse.new("//foo.bar.baz")
 
-      up.parse
+      expect(up.parse).to eq({uri: "//foo.bar.baz"})
     end
   end
 end

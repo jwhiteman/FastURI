@@ -9,16 +9,12 @@
 %%{
   machine url_parse;
 
-  action dbg {
-    printf("dbg called\n");
-  }
-
   action mark {
     MARK(mark, fpc);
   }
 
   action uri {
-    printf("URI: %s\n", PTR_TO(mark));
+    URLParse_set_uri(upi, PTR_TO(mark), LEN(mark, fpc));
   }
 
   action scheme {
@@ -50,7 +46,7 @@
   authority   = server;
   net_path    = "//" authority;
   relativeURI = net_path;
-  URI         = relativeURI >mark %/uri;
+  URI         = relativeURI >mark %uri;
 
   main := URI;
 }%%
@@ -58,7 +54,7 @@
 %% write data;
 
 void
-execute(const char *buffer, size_t len)
+execute(void *upi, const char *buffer, size_t len)
 {
   size_t mark = 0;
   int cs = 0;
