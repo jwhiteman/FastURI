@@ -19,10 +19,12 @@ task :ragel do
     target = "parse_machine.c"
     File.unlink(target) if File.exist?(target)
 
+    sh "rm -f doc/graph.png"
     sh "ragel parse_machine.rl -o #{target}"
-    sh "ragel -Vp parse_machine.rl -o a.dot"
-    sh "dot a.dot -Tpng -o a.png"
-    sh "open a.png"
+    sh "ragel -Vp parse_machine.rl -o graph.dot"
+    sh "dot graph.dot -Tpng -o ../../doc/graph.png"
+    sh "rm graph.dot"
+    sh "open ../../doc/graph.png"
 
     raise "ragel failed" unless File.exist?(target)
   end
