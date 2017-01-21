@@ -1,20 +1,20 @@
 #include <stdio.h>
 #include "parse_machine.h"
-#include "url_parse.h"
+#include "uri_parse.h"
 
 #define LEN(AT, FPC) (FPC - buffer - AT)
 #define MARK(M,FPC) (M = (FPC) - buffer)
 #define PTR_TO(FIELD) (buffer + FIELD)
 
 %%{
-  machine url_parse;
+  machine uri_parse;
 
   action mark {
     MARK(mark, fpc);
   }
 
   action uri {
-    URLParse_set(upi, PTR_TO(mark), LEN(mark, fpc), id_uri);
+    URIParse_set(upi, PTR_TO(mark), LEN(mark, fpc), id_uri);
   }
 
   action scheme {

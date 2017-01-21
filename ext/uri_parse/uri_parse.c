@@ -2,13 +2,13 @@
  * TODO: adopt consistent usage of either URL or URI
  * TODO: change from class to module (?)
 */
-#include "url_parse.h"
+#include "uri_parse.h"
 #include "parse_machine.h"
 
-VALUE cURLParse;
+VALUE cURIParse;
 
 VALUE
-URLParse_set(void *void_self, const char *sptr, size_t len, unsigned long k)
+URIParse_set(void *void_self, const char *sptr, size_t len, unsigned long k)
 {
   VALUE self = (VALUE)void_self;
   VALUE key  = (ID)k;
@@ -21,7 +21,7 @@ URLParse_set(void *void_self, const char *sptr, size_t len, unsigned long k)
 }
 
 VALUE
-URLParse_init(VALUE self, VALUE uri)
+URIParse_init(VALUE self, VALUE uri)
 {
   char *dptr = NULL;
   long dlen  = 0;
@@ -39,7 +39,7 @@ URLParse_init(VALUE self, VALUE uri)
 }
 
 VALUE
-URLParse_parse(VALUE self)
+URIParse_parse(VALUE self)
 {
   char *dptr = NULL;
   long dlen  = 0;
@@ -55,10 +55,10 @@ URLParse_parse(VALUE self)
 }
 
 void
-Init_url_parse(void)
+Init_uri_parse(void)
 {
-  cURLParse = rb_define_class("URLParse", rb_cObject);
+  cURIParse = rb_define_class("URIParse", rb_cObject);
 
-  rb_define_method(cURLParse, "initialize", URLParse_init, 1);
-  rb_define_method(cURLParse, "parse", URLParse_parse, 0);
+  rb_define_method(cURIParse, "initialize", URIParse_init, 1);
+  rb_define_method(cURIParse, "parse", URIParse_parse, 0);
 }

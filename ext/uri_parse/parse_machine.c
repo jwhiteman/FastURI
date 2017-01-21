@@ -2,7 +2,7 @@
 #line 1 "parse_machine.rl"
 #include <stdio.h>
 #include "parse_machine.h"
-#include "url_parse.h"
+#include "uri_parse.h"
 
 #define LEN(AT, FPC) (FPC - buffer - AT)
 #define MARK(M,FPC) (M = (FPC) - buffer)
@@ -14,15 +14,15 @@
 
 
 #line 17 "parse_machine.c"
-static const char _url_parse_actions[] = {
+static const char _uri_parse_actions[] = {
 	0, 1, 0, 1, 1
 };
 
-static const char _url_parse_key_offsets[] = {
+static const char _uri_parse_key_offsets[] = {
 	0, 0, 1, 2, 8, 16, 23, 30
 };
 
-static const char _url_parse_trans_keys[] = {
+static const char _uri_parse_trans_keys[] = {
 	47, 47, 48, 57, 65, 90, 97, 122, 
 	45, 46, 48, 57, 65, 90, 97, 122, 
 	45, 48, 57, 65, 90, 97, 122, 45, 
@@ -30,42 +30,42 @@ static const char _url_parse_trans_keys[] = {
 	48, 57, 65, 90, 97, 122, 0
 };
 
-static const char _url_parse_single_lengths[] = {
+static const char _uri_parse_single_lengths[] = {
 	0, 1, 1, 0, 2, 1, 1, 2
 };
 
-static const char _url_parse_range_lengths[] = {
+static const char _uri_parse_range_lengths[] = {
 	0, 0, 0, 3, 3, 3, 3, 3
 };
 
-static const char _url_parse_index_offsets[] = {
+static const char _uri_parse_index_offsets[] = {
 	0, 0, 2, 4, 8, 14, 19, 24
 };
 
-static const char _url_parse_indicies[] = {
+static const char _uri_parse_indicies[] = {
 	0, 1, 2, 1, 3, 4, 4, 1, 
 	5, 2, 3, 3, 3, 1, 5, 3, 
 	3, 3, 1, 6, 4, 4, 4, 1, 
 	6, 2, 4, 4, 4, 1, 0
 };
 
-static const char _url_parse_trans_targs[] = {
+static const char _uri_parse_trans_targs[] = {
 	2, 0, 3, 4, 7, 5, 6
 };
 
-static const char _url_parse_trans_actions[] = {
+static const char _uri_parse_trans_actions[] = {
 	1, 0, 0, 0, 0, 0, 0
 };
 
-static const char _url_parse_eof_actions[] = {
+static const char _uri_parse_eof_actions[] = {
 	0, 0, 0, 0, 0, 0, 0, 3
 };
 
-static const int url_parse_start = 1;
-static const int url_parse_first_final = 7;
-static const int url_parse_error = 0;
+static const int uri_parse_start = 1;
+static const int uri_parse_first_final = 7;
+static const int uri_parse_error = 0;
 
-static const int url_parse_en_main = 1;
+static const int uri_parse_en_main = 1;
 
 
 #line 55 "parse_machine.rl"
@@ -84,7 +84,7 @@ execute(void *upi, const char *buffer, size_t len)
   
 #line 86 "parse_machine.c"
 	{
-	cs = url_parse_start;
+	cs = uri_parse_start;
 	}
 
 #line 68 "parse_machine.rl"
@@ -102,10 +102,10 @@ execute(void *upi, const char *buffer, size_t len)
 	if ( cs == 0 )
 		goto _out;
 _resume:
-	_keys = _url_parse_trans_keys + _url_parse_key_offsets[cs];
-	_trans = _url_parse_index_offsets[cs];
+	_keys = _uri_parse_trans_keys + _uri_parse_key_offsets[cs];
+	_trans = _uri_parse_index_offsets[cs];
 
-	_klen = _url_parse_single_lengths[cs];
+	_klen = _uri_parse_single_lengths[cs];
 	if ( _klen > 0 ) {
 		const char *_lower = _keys;
 		const char *_mid;
@@ -128,7 +128,7 @@ _resume:
 		_trans += _klen;
 	}
 
-	_klen = _url_parse_range_lengths[cs];
+	_klen = _uri_parse_range_lengths[cs];
 	if ( _klen > 0 ) {
 		const char *_lower = _keys;
 		const char *_mid;
@@ -151,13 +151,13 @@ _resume:
 	}
 
 _match:
-	_trans = _url_parse_indicies[_trans];
-	cs = _url_parse_trans_targs[_trans];
+	_trans = _uri_parse_indicies[_trans];
+	cs = _uri_parse_trans_targs[_trans];
 
-	if ( _url_parse_trans_actions[_trans] == 0 )
+	if ( _uri_parse_trans_actions[_trans] == 0 )
 		goto _again;
 
-	_acts = _url_parse_actions + _url_parse_trans_actions[_trans];
+	_acts = _uri_parse_actions + _uri_parse_trans_actions[_trans];
 	_nacts = (unsigned int) *_acts++;
 	while ( _nacts-- > 0 )
 	{
@@ -181,14 +181,14 @@ _again:
 	_test_eof: {}
 	if ( p == eof )
 	{
-	const char *__acts = _url_parse_actions + _url_parse_eof_actions[cs];
+	const char *__acts = _uri_parse_actions + _uri_parse_eof_actions[cs];
 	unsigned int __nacts = (unsigned int) *__acts++;
 	while ( __nacts-- > 0 ) {
 		switch ( *__acts++ ) {
 	case 1:
 #line 16 "parse_machine.rl"
 	{
-    URLParse_set(upi, PTR_TO(mark), LEN(mark, p), id_uri);
+    URIParse_set(upi, PTR_TO(mark), LEN(mark, p), id_uri);
   }
 	break;
 #line 195 "parse_machine.c"
