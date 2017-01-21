@@ -3,10 +3,8 @@
 
 #include "ruby.h"
 
-VALUE URIParse_set(void *upi, const char *sptr, size_t len, unsigned long k);
+void URIParse_set(void *h, const char *sptr, size_t len, unsigned long k);
 
-#define id_ivar_uri rb_intern("@uri")
-#define id_ivar_parsed_results rb_intern("@parsed_results")
 #define id_uri rb_intern("uri")
 
 #endif /* URI_PARSE_H */

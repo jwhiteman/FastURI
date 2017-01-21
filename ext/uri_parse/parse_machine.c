@@ -71,7 +71,7 @@ static const int uri_parse_en_main = 1;
 #line 55 "parse_machine.rl"
 
 void
-execute(void *upi, const char *buffer, size_t len)
+execute(void *hash, const char *buffer, size_t len)
 {
   size_t mark = 0;
   int cs = 0;
@@ -188,7 +188,7 @@ _again:
 	case 1:
 #line 16 "parse_machine.rl"
 	{
-    URIParse_set(upi, PTR_TO(mark), LEN(mark, p), id_uri);
+    URIParse_set(hash, PTR_TO(mark), LEN(mark, p), id_uri);
   }
 	break;
 #line 195 "parse_machine.c"

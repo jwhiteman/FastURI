@@ -14,7 +14,7 @@
   }
 
   action uri {
-    URIParse_set(upi, PTR_TO(mark), LEN(mark, fpc), id_uri);
+    URIParse_set(hash, PTR_TO(mark), LEN(mark, fpc), id_uri);
   }
 
   action scheme {
@@ -54,7 +54,7 @@
 %% write data;
 
 void
-execute(void *upi, const char *buffer, size_t len)
+execute(void *hash, const char *buffer, size_t len)
 {
   size_t mark = 0;
   int cs = 0;
