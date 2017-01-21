@@ -37,13 +37,18 @@
      printf("fragment\n");
   }
 
+  escaped     = "%" xdigit xdigit;
+  mark        = "-" | "_" | "." | "!" | "~" | "*" | "'" | "(" | ")";
+  unreserved  = alnum | mark;
+  userinfo    = (unreserved | escaped | ";" | ":" | "&" | "=" | "+" | "$" | ",")*;
+  port        = digit+;
   IPv4address = digit+ "." digit+ "." digit+ "." digit+;
   toplabel    = alpha | alpha (alnum | "-")* alnum;
   domainlabel = alnum | alnum (alnum | "-")* alnum;
   hostname    = (domainlabel ".")* toplabel (".")?;
   host        = hostname | IPv4address;
-  hostport    = host;
-  server      = hostport;
+  hostport    = host (":" port)?;
+  server      = ((userinfo "@")? hostport)?;
   authority   = server;
   net_path    = "//" authority;
   relativeURI = net_path;
