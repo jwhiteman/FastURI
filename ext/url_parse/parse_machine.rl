@@ -14,7 +14,7 @@
   }
 
   action uri {
-    URLParse_set_uri(upi, PTR_TO(mark), LEN(mark, fpc));
+    URLParse_set(upi, PTR_TO(mark), LEN(mark, fpc), id_uri);
   }
 
   action scheme {

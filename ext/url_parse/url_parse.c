@@ -1,20 +1,21 @@
+/*
+ * TODO: adopt consistent usage of either URL or URI
+ * TODO: change from class to module (?)
+*/
 #include "url_parse.h"
 #include "parse_machine.h"
 
 VALUE cURLParse;
 
-#define id_ivar_uri rb_intern("@uri")
-#define id_ivar_parsed_results rb_intern("@parsed_results")
-
 VALUE
-URLParse_set_uri(void *void_self, const char *sptr, size_t len)
+URLParse_set(void *void_self, const char *sptr, size_t len, unsigned long k)
 {
   VALUE self = (VALUE)void_self;
-  VALUE v    = rb_str_new(sptr, len);
-  VALUE h    = rb_ivar_get(self, id_ivar_parsed_results);
+  VALUE key  = (ID)k;
+  VALUE val  = rb_str_new(sptr, len);
+  VALUE hash = rb_ivar_get(self, id_ivar_parsed_results);
 
-  ID id_uri = rb_intern("uri");
-  rb_hash_aset(h, ID2SYM(id_uri), v);
+  rb_hash_aset(hash, ID2SYM(key), val);
 
   return self;
 }

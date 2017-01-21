@@ -188,7 +188,7 @@ _again:
 	case 1:
 #line 16 "parse_machine.rl"
 	{
-    URLParse_set_uri(upi, PTR_TO(mark), LEN(mark, p));
+    URLParse_set(upi, PTR_TO(mark), LEN(mark, p), id_uri);
   }
 	break;
 #line 195 "parse_machine.c"
