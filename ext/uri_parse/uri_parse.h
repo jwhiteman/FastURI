@@ -6,5 +6,6 @@
 void URIParse_set(void *h, const char *sptr, size_t len, unsigned long k);
 
 #define id_uri rb_intern("uri")
+#define id_scheme rb_intern("scheme")
 
 #endif /* URI_PARSE_H */
