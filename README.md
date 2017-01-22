@@ -45,7 +45,7 @@ It will generate a file called "parser.png" in the doc/ directory.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/jwhiteman/fast_uri.
+Bug reports and pull requests are welcome on GitHub at https://github.com/jwhiteman/FastURI.
 
 In particular, I could use help in two areas:
 
