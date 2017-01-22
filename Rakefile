@@ -33,6 +33,5 @@ task graph: :ragel do
     sh "ragel -Vp parser.rl -o parser.dot"
     sh "dot parser.dot -Tpng -o ../../doc/parser.png"
     sh "rm parser.dot"
-    sh "open ../../doc/parser.png"
   end
 end
