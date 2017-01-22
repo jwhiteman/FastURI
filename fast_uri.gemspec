@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{A ragel-backed URI parser}
   spec.description   = %q{A ragel-backed URI parser}
-  spec.homepage      = "https://github.com/jwhiteman/fast_uri"
+  spec.homepage      = "https://github.com/jwhiteman/FastURI"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
