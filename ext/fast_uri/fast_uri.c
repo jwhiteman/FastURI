@@ -1,10 +1,10 @@
-#include "uri_parse.h"
-#include "parse_machine.h"
+#include "fast_uri.h"
+#include "parser.h"
 
-VALUE mURIParse;
+VALUE mFastURI;
 
 void
-URIParse_set(void *h, const char *sptr, size_t len, unsigned long k)
+FastURI_set(void *h, const char *sptr, size_t len, unsigned long k)
 {
   VALUE hash = (VALUE)h;
   VALUE key  = (ID)k;
@@ -14,7 +14,7 @@ URIParse_set(void *h, const char *sptr, size_t len, unsigned long k)
 }
 
 VALUE
-URIParse_parse(VALUE self, VALUE uri)
+FastURI_parse(VALUE self, VALUE uri)
 {
   char *dptr = NULL;
   long dlen  = 0;
@@ -30,9 +30,9 @@ URIParse_parse(VALUE self, VALUE uri)
 }
 
 void
-Init_uri_parse(void)
+Init_fast_uri(void)
 {
-  mURIParse = rb_define_module("URIParse");
+  mFastURI = rb_define_module("FastURI");
 
-  rb_define_singleton_method(mURIParse, "parse", URIParse_parse, 1);
+  rb_define_singleton_method(mFastURI, "parse", FastURI_parse, 1);
 }

@@ -1,7 +1,7 @@
 require "test_helper"
 
 def assert_parse(key, left, right)
-  assert_equal URIParse.parse(left)[key], right
+  assert_equal FastURI.parse(left)[key], right
 end
 
 class URIParseTest < Minitest::Test

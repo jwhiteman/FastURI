@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require "uri_parse"
+require "fast_uri"
 
 require "minitest/autorun"
 require "pry"

@@ -12,24 +12,27 @@ require "rake/extensiontask"
 
 task build: :compile
 
-Rake::ExtensionTask.new("uri_parse") do |ext|
-  ext.lib_dir = "lib/uri_parse"
+Rake::ExtensionTask.new("fast_uri") do |ext|
+  ext.lib_dir = "lib/fast_uri"
 end
 
 task default: %i(clobber ragel compile test)
 
 task :ragel do
-  Dir.chdir "ext/uri_parse" do
-    target = "parse_machine.c"
+  Dir.chdir "ext/fast_uri" do
+    target = "parser.c"
     File.unlink(target) if File.exist?(target)
-
-    sh "rm -f doc/graph.png"
-    sh "ragel parse_machine.rl -o #{target}"
-    sh "ragel -Vp parse_machine.rl -o graph.dot"
-    sh "dot graph.dot -Tpng -o ../../doc/graph.png"
-    sh "rm graph.dot"
-    sh "open ../../doc/graph.png"
-
+    sh "ragel parser.rl -o #{target}"
     raise "ragel failed" unless File.exist?(target)
+  end
+end
+
+task graph: :ragel do
+  Dir.chdir "ext/fast_uri" do
+    sh "rm -f doc/graph.png"
+    sh "ragel -Vp parser.rl -o parser.dot"
+    sh "dot parser.dot -Tpng -o ../../doc/parser.png"
+    sh "rm parser.dot"
+    sh "open ../../doc/parser.png"
   end
 end

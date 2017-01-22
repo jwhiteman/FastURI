@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "parse_machine.h"
-#include "uri_parse.h"
+#include "parser.h"
+#include "fast_uri.h"
 
 #define LEN(AT, FPC) (FPC - buffer - AT)
 #define MARK(M,FPC) (M = (FPC) - buffer)
@@ -14,31 +14,31 @@
   }
 
   action path {
-    URIParse_set(hash, PTR_TO(mark), LEN(mark, fpc), id_path);
+    FastURI_set(hash, PTR_TO(mark), LEN(mark, fpc), id_path);
   }
 
   action scheme {
-    URIParse_set(hash, PTR_TO(mark), LEN(mark, fpc), id_scheme);
+    FastURI_set(hash, PTR_TO(mark), LEN(mark, fpc), id_scheme);
   }
 
   action host {
-    URIParse_set(hash, PTR_TO(mark), LEN(mark, fpc), id_host);
+    FastURI_set(hash, PTR_TO(mark), LEN(mark, fpc), id_host);
   }
 
   action userinfo {
-    URIParse_set(hash, PTR_TO(mark), LEN(mark, fpc), id_userinfo);
+    FastURI_set(hash, PTR_TO(mark), LEN(mark, fpc), id_userinfo);
   }
 
   action port {
-    URIParse_set(hash, PTR_TO(mark), LEN(mark, fpc), id_port);
+    FastURI_set(hash, PTR_TO(mark), LEN(mark, fpc), id_port);
   }
 
   action query {
-    URIParse_set(hash, PTR_TO(mark), LEN(mark, fpc), id_query);
+    FastURI_set(hash, PTR_TO(mark), LEN(mark, fpc), id_query);
   }
 
   action fragment {
-    URIParse_set(hash, PTR_TO(mark), LEN(mark, fpc), id_fragment);
+    FastURI_set(hash, PTR_TO(mark), LEN(mark, fpc), id_fragment);
   }
 
   sub_delims    = "!" | "$" | "&" | "'" | "(" | ")" | "*" | "+" | "," | ";" | "=";
@@ -52,7 +52,6 @@
   path_absolute = "/" (segment_nz ( "/" segment )*)?;
   path_abempty  = ("/" segment)*;
   path_noscheme = segment_nz_nc ("/" segment)*;
-  path_empty    = pchar {0};
   port          = digit* >mark %port;
   reg_name      = (unreserved | pct_encoded | sub_delims)*;
   dec_octet     = digit{2};
@@ -73,9 +72,9 @@
   host          = ((IP_literal) | IPv4address | reg_name) >mark %host;
   userinfo      = (unreserved | pct_encoded | sub_delims | ":" )* >mark %userinfo;
   authority     = (userinfo "@")? host (":" port)?;
-  hier_part     = (("//" authority (path_abempty >mark %path))  | (path_absolute | path_rootless | path_empty) >mark %path);
+  hier_part     = (("//" authority (path_abempty >mark %path))  | (path_absolute | path_rootless) >mark %path);
   scheme        = (alpha (alpha | digit | "+" | "-" | ".")*) >mark %scheme;
-  relative_part = (("//" authority path_abempty)  | (path_absolute | path_noscheme | path_empty) >mark %path);
+  relative_part = (("//" authority path_abempty)  | (path_absolute | path_noscheme) >mark %path);
   query         = (pchar | "/" | "?")* >mark %query;
   fragment      = (pchar | "/" | "?" )* >mark %fragment;
   relative      = relative_part ("?" query)? ("#" fragment)?;
